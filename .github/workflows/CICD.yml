@@ -41,7 +41,7 @@ jobs:
       - name: Docker build & push to dev
         run: |
           docker login -u ${{ secrets.DOCKER_USER_NAME }} -p ${{ secrets.DOCKER_USER_TOKEN }}
-          docker build -t ${{ secrets.DOCKER_USER_NAME }}/daisomall  .
+          docker build -f Dockerfile-dev -t ${{ secrets.DOCKER_USER_NAME }}/daisomall  .
           docker push ${{ secrets.DOCKER_USER_NAME }}/daisomall
 
   deploy:
