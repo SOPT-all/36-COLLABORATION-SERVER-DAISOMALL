@@ -4,6 +4,7 @@ import com.sopt.DaisoMall.global.common.entity.BaseEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,6 +14,7 @@ import lombok.experimental.SuperBuilder;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @SuperBuilder
+@Table(name = "brand")
 public class Brand extends BaseEntity {
 
     @Id

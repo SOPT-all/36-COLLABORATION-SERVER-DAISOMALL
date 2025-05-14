@@ -8,7 +8,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,6 +21,7 @@ import lombok.experimental.SuperBuilder;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @SuperBuilder
+@Table(name = "product")
 public class Product extends BaseEntity {
 
     @Id
@@ -38,5 +41,6 @@ public class Product extends BaseEntity {
     private Category category;
 
     @ManyToOne(optional = false)
+    @JoinColumn(name = "brand_id")
     private Brand brand;
 }
