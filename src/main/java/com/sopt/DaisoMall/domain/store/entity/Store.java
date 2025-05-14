@@ -9,6 +9,7 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
@@ -30,6 +31,7 @@ public class Store extends BaseEntity {
     private String location;
 
     @Column(nullable = false)
+    @Builder.Default
     private boolean isPickupAvailable = false;
 
     @Enumerated(EnumType.STRING)
