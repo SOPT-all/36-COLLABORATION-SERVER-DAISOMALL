@@ -2,7 +2,6 @@ package com.sopt.DaisoMall.domain.product.entity;
 
 import com.sopt.DaisoMall.domain.brand.entity.Brand;
 import com.sopt.DaisoMall.domain.product.entity.enums.Category;
-import com.sopt.DaisoMall.domain.product.entity.enums.Label;
 import com.sopt.DaisoMall.global.common.entity.BaseEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -39,10 +38,6 @@ public class Product extends BaseEntity {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Category category;
-
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private Label label;
 
     @ManyToOne(optional = false)
     private Brand brand;
