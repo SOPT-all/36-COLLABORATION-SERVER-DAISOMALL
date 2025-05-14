@@ -1,48 +1,18 @@
 package com.sopt.DaisoMall.global.common.dto.response;
 
-import lombok.Getter;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
-@Getter
-public class ApiResponse<T> {
-    private final int status;
-    private final String message;
-    private final T data;
-
-    public ApiResponse(int status, String message, T data) {
-        this.status  = status;
-        this.message = message;
-        this.data    = data;
+@JsonInclude(JsonInclude.Include.NON_NULL)
+public record ApiResponse<T>(
+        int status,
+        String message,
+        T data
+) {
+    public static <T> ApiResponse<T> response(int status, String message, T data) {
+        return new ApiResponse<>(status, message, data);
     }
 
-    public ApiResponse(int status, String message) {
-        this(status, message, null);
-    }
-
-    public static <T> ResponseEntity<ApiResponse<T>> response(
-            HttpStatus httpStatus,
-            String message,
-            T data
-    ) {
-        ApiResponse<T> body = new ApiResponse<>(
-                httpStatus.value(),
-                message,
-                data
-        );
-
-        return ResponseEntity.status(httpStatus).body(body);
-    }
-
-    public static <T> ResponseEntity<ApiResponse<T>> response(
-            HttpStatus httpStatus,
-            String message
-    ) {
-        ApiResponse<T> body = new ApiResponse<>(
-                httpStatus.value(),
-                message
-        );
-
-        return ResponseEntity.status(httpStatus).body(body);
+    public static <T> ApiResponse<T> response(int status, String message) {
+        return new ApiResponse<>(status, message, null);
     }
 }
