@@ -3,7 +3,6 @@ package com.sopt.DaisoMall.domain.tag.entity;
 import com.sopt.DaisoMall.domain.product.entity.Product;
 import com.sopt.DaisoMall.global.common.entity.BaseEntity;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
@@ -20,7 +19,7 @@ import lombok.experimental.SuperBuilder;
 @Table(uniqueConstraints = @UniqueConstraint(columnNames = {"product_id", "label"}))
 public class ProductTagMapping extends BaseEntity {
 
-    @Id @GeneratedValue
+    @Id
     private Long id;
 
     @ManyToOne(optional = false)
