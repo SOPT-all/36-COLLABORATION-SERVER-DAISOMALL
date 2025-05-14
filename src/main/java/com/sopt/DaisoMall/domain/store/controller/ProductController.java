@@ -5,6 +5,7 @@ import com.sopt.DaisoMall.domain.store.dto.request.StoreProductSearchRequest;
 import com.sopt.DaisoMall.domain.store.dto.request.StoreProductSortRequest;
 import com.sopt.DaisoMall.domain.store.dto.response.StoreProductListResponse;
 import com.sopt.DaisoMall.domain.store.dto.response.StoreProductResponse;
+import com.sopt.DaisoMall.domain.store.entity.enums.SortOption;
 import com.sopt.DaisoMall.domain.store.service.StoreProductSearchService;
 import com.sopt.DaisoMall.domain.store.service.StoreProductSortService;
 import com.sopt.DaisoMall.global.common.dto.response.ApiResponse;
@@ -35,7 +36,8 @@ public class ProductController {
     @Operation(summary = "검색된 상품 정렬 (최신,가격 낮은 순, 높은 순)")
     @GetMapping("/search/{keyword}/sort")
     public ApiResponse<StoreProductListResponse> sort(@PathVariable String keyword, StoreProductSortRequest request) {
-        Slice<StoreProductResponse> slice = sortService.sortProducts(keyword, request.sortOption(), request.pageNumber(), request.pageSize());
+        SortOption option = request.toSortOption();
+        Slice<StoreProductResponse> slice = sortService.sortProducts(keyword, option, request.pageNumber(), request.pageSize());
 
         return ApiResponse.response(HttpStatus.OK.value(), ResponseMessage.SORT_STORE_PRODUCTS_SUCCESS.getMessage(), StoreProductListResponse.of(slice));
     }

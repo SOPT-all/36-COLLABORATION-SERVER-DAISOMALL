@@ -3,8 +3,11 @@ package com.sopt.DaisoMall.domain.store.dto.request;
 import com.sopt.DaisoMall.domain.store.entity.enums.SortOption;
 
 public record StoreProductSortRequest(
-        SortOption sortOption,
+        String sortOption,
         int pageNumber,
         int pageSize
 ) {
+    public SortOption toSortOption() {
+        return SortOption.from(sortOption);
+    }
 }
