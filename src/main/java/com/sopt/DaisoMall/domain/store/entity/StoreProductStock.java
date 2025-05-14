@@ -23,7 +23,7 @@ import lombok.experimental.SuperBuilder;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @SuperBuilder
-@Table(uniqueConstraints = @UniqueConstraint(columnNames = {"store_id", "product_id"}))
+@Table(name = "store_product_stock", uniqueConstraints = @UniqueConstraint(columnNames = {"store_id", "product_id"}))
 public class StoreProductStock extends BaseEntity {
 
     @Id
