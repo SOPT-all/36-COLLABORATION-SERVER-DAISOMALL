@@ -6,6 +6,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
@@ -26,8 +27,10 @@ public class ProductImage extends BaseEntity {
     private String imageUrl;
 
     @Column(nullable = false)
+    @Builder.Default
     private boolean isMain = false;
 
     @Column(nullable = false)
+    @Builder.Default
     private int sortOrder = 0;
 }
