@@ -1,5 +1,7 @@
-package com.sopt.DaisoMall.domain.product.dto.response;
+package com.sopt.DaisoMall.domain.product.dto.response.list;
 
+import com.sopt.DaisoMall.domain.product.dto.response.PageableResponse;
+import com.sopt.DaisoMall.domain.product.dto.response.ProductResponse;
 import java.util.List;
 import lombok.Builder;
 import org.springframework.data.domain.Slice;
