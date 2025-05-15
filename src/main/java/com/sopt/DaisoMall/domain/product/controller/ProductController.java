@@ -3,9 +3,11 @@ package com.sopt.DaisoMall.domain.product.controller;
 
 import com.sopt.DaisoMall.domain.product.dto.request.ProductSearchRequest;
 import com.sopt.DaisoMall.domain.product.dto.request.ProductSortRequest;
+import com.sopt.DaisoMall.domain.product.dto.response.PopularProductListResponse;
 import com.sopt.DaisoMall.domain.product.dto.response.ProductListResponse;
 import com.sopt.DaisoMall.domain.product.dto.response.ProductResponse;
 import com.sopt.DaisoMall.domain.product.entity.enums.SortOption;
+import com.sopt.DaisoMall.domain.product.service.PopularProductService;
 import com.sopt.DaisoMall.domain.product.service.ProductSearchService;
 import com.sopt.DaisoMall.domain.product.service.ProductSortService;
 import com.sopt.DaisoMall.global.common.dto.response.ApiResponse;
@@ -25,6 +27,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class ProductController {
     private final ProductSortService sortService;
     private final ProductSearchService searchService;
+    private final PopularProductService popularProductService;
 
     @Operation(summary = "상품 검색 (상품명, 품번, 브랜드)")
     @GetMapping("/search")
@@ -40,5 +43,12 @@ public class ProductController {
         Slice<ProductResponse> slice = sortService.sortProducts(keyword, option, request.pageNumber(), request.pageSize());
 
         return ApiResponse.response(HttpStatus.OK.value(), ResponseMessage.SORT_STORE_PRODUCTS_SUCCESS.getMessage(), ProductListResponse.of(slice));
+    }
+
+    @Operation(summary = "지금 많이 찾는 상품 조회", description = "지금 많이 찾는 상품 20개를 5개씩 4페이지로 나누어 리스트로 반환합니다.")
+    @GetMapping("/popular")
+    public ApiResponse<PopularProductListResponse> search() {
+        PopularProductListResponse response = popularProductService.getPopularProducts();
+        return ApiResponse.response(HttpStatus.OK.value(), ResponseMessage.GET_POPULAR_PRODUCTS_SUCCESS.getMessage(), response);
     }
 }
