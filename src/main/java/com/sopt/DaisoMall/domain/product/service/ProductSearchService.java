@@ -1,7 +1,9 @@
 package com.sopt.DaisoMall.domain.product.service;
 
+import com.sopt.DaisoMall.domain.product.dto.response.ProductBrandResponse;
 import com.sopt.DaisoMall.domain.product.dto.response.ProductResponse;
 import com.sopt.DaisoMall.domain.product.exception.PageNotFoundException;
+import com.sopt.DaisoMall.domain.product.repository.ProductRepository;
 import com.sopt.DaisoMall.domain.product.repository.ProductStockRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
@@ -15,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
 public class ProductSearchService {
+    private final ProductRepository productRepository;
     private final ProductStockRepository stockRepository;
 
     public Slice<ProductResponse> searchProducts(
@@ -29,5 +32,11 @@ public class ProductSearchService {
         return stockRepository
                 .searchByKeyword(keyword, page)
                 .map(ProductResponse::from);
+    }
+
+    public Slice<ProductBrandResponse> getBrandProducts(Long brandId, int pageNumber, int pageSize) {
+        Pageable pageable = PageRequest.of(pageNumber, pageSize);
+        return productRepository.findByBrandId(brandId, pageable)
+                .map(ProductBrandResponse::from);
     }
 }
