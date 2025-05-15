@@ -2,7 +2,7 @@ server:
   port: ${SERVER_PORT}
 spring:
   datasource:
-    url: ${RDB_URL}
+    url: ${DB_URL}
     username: ${RDS_USER_NAME}
     password: ${RDS_USER_PW}
     driver-class-name: com.mysql.cj.jdbc.Driver

@@ -56,17 +56,12 @@ jobs:
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_SECRET_PEM }}
           script: |
-
+            sudo docker rm -f app || true
+            
             sudo docker pull ${{ secrets.DOCKER_USER_NAME }}/daisomall:latest
 
-            if sudo docker ps -q -f name=app | grep -q .; then
-              sudo docker stop app
-              sudo docker rm  app
-            fi
-
             sudo docker run --name app -d -p 8080:8080 \
-              --env-file ./sopt-dev.env \
-              -e TZ=Asia/Seoul \
+              --env-file ./sopt-dev.env -e TZ=Asia/Seoul -e SERVER_PORT=$GREEN_PORT \
                 ${{ secrets.DOCKER_USER_NAME }}/daisomall:latest
 
             sleep 5
