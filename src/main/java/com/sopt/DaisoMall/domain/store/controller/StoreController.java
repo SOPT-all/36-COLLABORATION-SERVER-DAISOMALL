@@ -1,10 +1,9 @@
 package com.sopt.DaisoMall.domain.store.controller;
 
-import com.sopt.DaisoMall.domain.store.controller.ResponseMessage;
-import com.sopt.DaisoMall.domain.store.dto.StoreFilterRequest;
-import com.sopt.DaisoMall.domain.store.dto.StoreStockListResponse;
-import com.sopt.DaisoMall.domain.store.dto.StoreStockRequest;
-import com.sopt.DaisoMall.domain.store.dto.StoreStockResponse;
+import com.sopt.DaisoMall.domain.store.dto.request.StoreFilterRequest;
+import com.sopt.DaisoMall.domain.store.dto.response.StoreStockListResponse;
+import com.sopt.DaisoMall.domain.store.dto.request.StoreStockRequest;
+import com.sopt.DaisoMall.domain.store.dto.response.StoreStockResponse;
 import com.sopt.DaisoMall.domain.store.service.StoreService;
 import com.sopt.DaisoMall.global.common.dto.response.ApiResponse;
 import io.swagger.v3.oas.annotations.Operation;

@@ -1,4 +1,4 @@
-package com.sopt.DaisoMall.domain.store.dto;
+package com.sopt.DaisoMall.domain.store.dto.response;
 
 import com.querydsl.core.annotations.QueryProjection;
 import com.sopt.DaisoMall.domain.store.entity.Store;

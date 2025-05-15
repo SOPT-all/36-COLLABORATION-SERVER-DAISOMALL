@@ -1,4 +1,4 @@
-package com.sopt.DaisoMall.domain.store.dto;
+package com.sopt.DaisoMall.domain.store.dto.request;
 
 public record StoreFilterRequest(
         Boolean pickup, // 픽업가능매장
