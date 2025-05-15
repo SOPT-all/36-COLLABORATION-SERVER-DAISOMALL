@@ -1,6 +1,6 @@
-package com.sopt.DaisoMall.domain.store.entity.enums;
+package com.sopt.DaisoMall.domain.product.entity.enums;
 
-import com.sopt.DaisoMall.domain.store.exception.SortOptionNotFoundException;
+import com.sopt.DaisoMall.domain.product.exception.SortOptionNotFoundException;
 import java.util.Arrays;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

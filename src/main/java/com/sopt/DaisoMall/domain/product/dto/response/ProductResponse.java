@@ -1,17 +1,17 @@
-package com.sopt.DaisoMall.domain.store.dto.response;
+package com.sopt.DaisoMall.domain.product.dto.response;
 
 import com.sopt.DaisoMall.domain.product.entity.Product;
 import com.sopt.DaisoMall.domain.store.entity.StoreProductStock;
 
-public record StoreProductResponse(
+public record ProductResponse(
         Long productId,
         String productName,
         int shelfNo,
         int price
 ) {
-    public static StoreProductResponse from(StoreProductStock stock) {
+    public static ProductResponse from(StoreProductStock stock) {
         Product product = stock.getProduct();
-        return new StoreProductResponse(
+        return new ProductResponse(
                 product.getId(),
                 product.getProductName(),
                 stock.getShelfNo(),

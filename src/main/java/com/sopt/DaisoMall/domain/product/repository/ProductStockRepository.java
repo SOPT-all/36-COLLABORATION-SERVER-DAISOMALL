@@ -1,4 +1,4 @@
-package com.sopt.DaisoMall.domain.store.repository;
+package com.sopt.DaisoMall.domain.product.repository;
 
 import com.sopt.DaisoMall.domain.store.entity.StoreProductStock;
 import org.springframework.data.domain.Pageable;
@@ -9,7 +9,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface StoreProductStockRepository extends JpaRepository<StoreProductStock, Long> {
+public interface ProductStockRepository extends JpaRepository<StoreProductStock, Long> {
 
     @Query("""
     SELECT s

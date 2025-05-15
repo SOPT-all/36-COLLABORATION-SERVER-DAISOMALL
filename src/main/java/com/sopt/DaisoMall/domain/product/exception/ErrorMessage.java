@@ -1,4 +1,4 @@
-package com.sopt.DaisoMall.domain.store.exception;
+package com.sopt.DaisoMall.domain.product.exception;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

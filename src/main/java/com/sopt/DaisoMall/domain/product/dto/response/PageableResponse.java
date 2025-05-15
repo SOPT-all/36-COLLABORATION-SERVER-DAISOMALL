@@ -1,4 +1,4 @@
-package com.sopt.DaisoMall.domain.store.dto.response;
+package com.sopt.DaisoMall.domain.product.dto.response;
 
 
 import lombok.Builder;

@@ -1,9 +1,9 @@
-package com.sopt.DaisoMall.domain.store.service;
+package com.sopt.DaisoMall.domain.product.service;
 
-import com.sopt.DaisoMall.domain.store.dto.response.StoreProductResponse;
-import com.sopt.DaisoMall.domain.store.entity.enums.SortOption;
-import com.sopt.DaisoMall.domain.store.exception.PageNotFoundException;
-import com.sopt.DaisoMall.domain.store.repository.StoreProductStockRepository;
+import com.sopt.DaisoMall.domain.product.dto.response.ProductResponse;
+import com.sopt.DaisoMall.domain.product.entity.enums.SortOption;
+import com.sopt.DaisoMall.domain.product.exception.PageNotFoundException;
+import com.sopt.DaisoMall.domain.product.repository.ProductStockRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -14,10 +14,10 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
-public class StoreProductSortService {
-    private final StoreProductStockRepository stockRepository;
+public class ProductSortService {
+    private final ProductStockRepository stockRepository;
 
-    public Slice<StoreProductResponse> sortProducts(
+    public Slice<ProductResponse> sortProducts(
             String keyword,
             SortOption option,
             int pageNumber,
@@ -28,6 +28,6 @@ public class StoreProductSortService {
 
         Pageable pageable = PageRequest.of(pageNumber, pageSize, option.toSort());
         return stockRepository.searchByKeyword(keyword, pageable)
-                .map(StoreProductResponse::from);
+                .map(ProductResponse::from);
     }
 }

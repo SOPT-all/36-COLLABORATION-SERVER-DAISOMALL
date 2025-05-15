@@ -1,8 +1,8 @@
-package com.sopt.DaisoMall.domain.store.dto.request;
+package com.sopt.DaisoMall.domain.product.dto.request;
 
-import com.sopt.DaisoMall.domain.store.entity.enums.SortOption;
+import com.sopt.DaisoMall.domain.product.entity.enums.SortOption;
 
-public record StoreProductSortRequest(
+public record ProductSortRequest(
         String sortOption,
         int pageNumber,
         int pageSize

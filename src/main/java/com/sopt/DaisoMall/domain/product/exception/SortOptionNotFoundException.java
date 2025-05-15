@@ -1,4 +1,4 @@
-package com.sopt.DaisoMall.domain.store.exception;
+package com.sopt.DaisoMall.domain.product.exception;
 
 import com.sopt.DaisoMall.global.common.exception.BaseException;
 import org.springframework.http.HttpStatus;
