@@ -61,7 +61,7 @@ jobs:
             sudo docker pull ${{ secrets.DOCKER_USER_NAME }}/daisomall:latest
 
             sudo docker run --name app -d -p 8080:8080 \
-              --env-file ./sopt-dev.env -e TZ=Asia/Seoul -e SERVER_PORT=$GREEN_PORT \
+              --env-file ./sopt-dev.env -e TZ=Asia/Seoul -e SPRING_PROFILES_ACTIVE=dev -e SERVER_PORT=8080 \
                 ${{ secrets.DOCKER_USER_NAME }}/daisomall:latest
 
             sleep 5
