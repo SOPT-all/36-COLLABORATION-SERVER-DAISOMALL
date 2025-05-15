@@ -62,13 +62,10 @@ jobs:
             
             sudo docker pull ${{ secrets.DOCKER_USER_NAME }}/daisomall:latest
 
-            sudo docker run --name app -d \
-              -p $SERVER_PORT:$SERVER_PORT \
-              --env-file /home/ubuntu/sopt-dev.env \
-              -e TZ=Asia/Seoul \
-              -e SPRING_PROFILES_ACTIVE=dev \
-              -e SERVER_PORT=$SERVER_PORT \
-              ${{ secrets.DOCKER_USER_NAME }}/daisomall:latest
+            sudo docker run --name app -d -p 8080:8080 \
+            --env-file /home/ubuntu/sopt-dev.env \
+            -e TZ=Asia/Seoul \
+            ${{ secrets.DOCKER_USER_NAME }}/daisomall:latest
 
             sleep 5
             curl -f http://localhost:8080/health-check
