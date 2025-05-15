@@ -78,6 +78,7 @@ public class StoreService {
 
         return queryFactory
                 .select(new QStoreStockResponse(
+                        store.id,
                         store.storeName,
                         store.location,
                         store.openingHours,

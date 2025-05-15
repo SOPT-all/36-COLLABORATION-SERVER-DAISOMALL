@@ -7,6 +7,8 @@ import lombok.Getter;
 
 @Getter
 public class StoreStockResponse {
+
+    private final long storeId;
     private final String storeName;
     private final String location;
     private final String openingHours;
@@ -19,9 +21,10 @@ public class StoreStockResponse {
     private final String stockStatus;
 
     @QueryProjection
-    public StoreStockResponse(String storeName, String location, String openingHours,
+    public StoreStockResponse(long storeId, String storeName, String location, String openingHours,
                               Double latitude, Double longitude, Boolean isPickupAvailable,
                               String floor, int shelfNo, long stockCount, String stockStatus) {
+        this.storeId = storeId;
         this.storeName = storeName;
         this.location = location;
         this.openingHours = openingHours;
@@ -37,6 +40,7 @@ public class StoreStockResponse {
     public static StoreStockResponse from(StoreProductStock stock) {
         Store store = stock.getStore();
         return new StoreStockResponse(
+                store.getId(),
                 store.getStoreName(),
                 store.getLocation(),
                 store.getOpeningHours(),
