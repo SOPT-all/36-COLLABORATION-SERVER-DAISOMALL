@@ -3,9 +3,11 @@ package com.sopt.DaisoMall.domain.product.controller;
 
 import com.sopt.DaisoMall.domain.product.dto.request.ProductSearchRequest;
 import com.sopt.DaisoMall.domain.product.dto.request.ProductSortRequest;
-import com.sopt.DaisoMall.domain.product.dto.response.PopularProductListResponse;
-import com.sopt.DaisoMall.domain.product.dto.response.ProductListResponse;
+import com.sopt.DaisoMall.domain.product.dto.response.ProductBrandResponse;
 import com.sopt.DaisoMall.domain.product.dto.response.ProductResponse;
+import com.sopt.DaisoMall.domain.product.dto.response.list.PopularProductListResponse;
+import com.sopt.DaisoMall.domain.product.dto.response.list.ProductBrandListResponse;
+import com.sopt.DaisoMall.domain.product.dto.response.list.ProductListResponse;
 import com.sopt.DaisoMall.domain.product.entity.enums.SortOption;
 import com.sopt.DaisoMall.domain.product.service.PopularProductService;
 import com.sopt.DaisoMall.domain.product.service.ProductSearchService;
@@ -50,5 +52,12 @@ public class ProductController {
     public ApiResponse<PopularProductListResponse> search() {
         PopularProductListResponse response = popularProductService.getPopularProducts();
         return ApiResponse.response(HttpStatus.OK.value(), ResponseMessage.GET_POPULAR_PRODUCTS_SUCCESS.getMessage(), response);
+    }
+
+    @Operation(summary = "브랜드별 상품 조회")
+    @GetMapping("/{brandId}")
+    public ApiResponse<ProductBrandListResponse> getBrandProducts(@PathVariable Long brandId, ProductSearchRequest request) {
+        Slice<ProductBrandResponse> slice = searchService.getBrandProducts(brandId, request.pageNumber(), request.pageSize());
+        return ApiResponse.response(HttpStatus.OK.value(), ResponseMessage.GET_BRAND_PRODUCTS_SUCCESS.getMessage(), ProductBrandListResponse.of(slice));
     }
 }

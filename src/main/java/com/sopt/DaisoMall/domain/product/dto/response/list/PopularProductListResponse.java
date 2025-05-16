@@ -1,7 +1,7 @@
-package com.sopt.DaisoMall.domain.product.dto.response;
+package com.sopt.DaisoMall.domain.product.dto.response.list;
 
+import com.sopt.DaisoMall.domain.product.dto.response.PopularProductResponse;
 import com.sopt.DaisoMall.domain.product.entity.Product;
-
 import java.util.ArrayList;
 import java.util.List;
 
