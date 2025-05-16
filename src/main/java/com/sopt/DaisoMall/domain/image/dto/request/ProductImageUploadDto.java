@@ -1,4 +1,4 @@
-package com.sopt.DaisoMall.domain.image.dto;
+package com.sopt.DaisoMall.domain.image.dto.request;
 
 public record ProductImageUploadDto(
         long productId,

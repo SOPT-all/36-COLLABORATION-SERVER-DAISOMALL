@@ -2,14 +2,13 @@ package com.sopt.DaisoMall.domain.image.controller;
 
 import com.sopt.DaisoMall.domain.image.service.ProductImageService;
 import com.sopt.DaisoMall.domain.image.service.S3Service;
-import com.sopt.DaisoMall.domain.image.dto.ProductImageUploadDto;
+import com.sopt.DaisoMall.domain.image.dto.request.ProductImageUploadDto;
 import com.sopt.DaisoMall.global.common.dto.response.ApiResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 

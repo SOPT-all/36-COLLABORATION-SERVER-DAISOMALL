@@ -1,5 +1,6 @@
 package com.sopt.DaisoMall.domain.product.dto.response;
 
+import com.sopt.DaisoMall.domain.image.dto.request.ProductImageDto;
 import com.sopt.DaisoMall.domain.product.dto.querydsl.QueryResultDto;
 
 import java.util.List;
@@ -11,10 +12,9 @@ public record ProductDetailResponse(
         String ratingAvg,
         String reviewCount,
         String brandName,
-        List<String> mainImages,
-        List<String> detailImages
+        ProductImageResponse productImages
 ) {
-    public static ProductDetailResponse from(QueryResultDto dto) {
+    public static ProductDetailResponse from(QueryResultDto dto, List<ProductImageDto> main, List<ProductImageDto> detail) {
         Double ratingAvg = Math.round(dto.ratingAvg() * 10.0) / 10.0;
         return new ProductDetailResponse(
                 dto.productId(),
@@ -23,8 +23,7 @@ public record ProductDetailResponse(
                 ratingAvg.toString(),
                 dto.reviewCount().toString(),
                 dto.brandName(),
-                dto.mainImages(),
-                dto.detailImages()
+                new ProductImageResponse(new ProductImageResponse.ProductImageWrapper(main, detail))
         );
     }
 

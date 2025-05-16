@@ -1,15 +1,13 @@
 package com.sopt.DaisoMall.domain.image.service;
 
-import com.sopt.DaisoMall.domain.image.dto.ProductImageUploadDto;
+import com.sopt.DaisoMall.domain.image.dto.request.ProductImageUploadDto;
 import com.sopt.DaisoMall.domain.image.exception.InvalidSortOrderException;
 import com.sopt.DaisoMall.domain.product.entity.Product;
 import com.sopt.DaisoMall.domain.product.entity.ProductImage;
 import com.sopt.DaisoMall.domain.product.exception.NotFoundProductException;
 import com.sopt.DaisoMall.domain.product.repository.ProductImageRepository;
 import com.sopt.DaisoMall.domain.product.repository.ProductRepository;
-import com.sopt.DaisoMall.global.common.exception.BaseException;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;

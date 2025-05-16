@@ -4,8 +4,10 @@ import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.Expressions;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.sopt.DaisoMall.domain.brand.entity.QBrand;
+import com.sopt.DaisoMall.domain.image.dto.request.ProductImageDto;
 import com.sopt.DaisoMall.domain.product.dto.querydsl.QueryResultDto;
 import com.sopt.DaisoMall.domain.product.dto.response.ProductDetailResponse;
+import com.sopt.DaisoMall.domain.product.dto.response.ProductImageResponse;
 import com.sopt.DaisoMall.domain.product.entity.QProduct;
 import com.sopt.DaisoMall.domain.product.entity.QProductImage;
 import com.sopt.DaisoMall.domain.review.entity.QReview;
@@ -21,8 +23,8 @@ public class ProductDetailService {
     private final JPAQueryFactory queryFactory;
 
     public ProductDetailResponse getProductDetail(long productId) {
-        List<String> mainImages = fetchImages(productId, true);
-        List<String> detailImages = fetchImages(productId, false);
+        List<ProductImageDto> mainImages = fetchImages(productId, true);
+        List<ProductImageDto> detailImages = fetchImages(productId, false);
 
         QueryResultDto result = fetchProductDetail(productId, mainImages, detailImages);
 
@@ -30,13 +32,16 @@ public class ProductDetailService {
 //            throw new ProductNotFoundException();
 //        }
 
-        return ProductDetailResponse.from(result);
+        return ProductDetailResponse.from(result, mainImages, detailImages);
     }
 
-    private List<String> fetchImages(Long productId, boolean isMain) {
+    private List<ProductImageDto> fetchImages(Long productId, boolean isMain) {
         QProductImage image = QProductImage.productImage;
         return queryFactory
-                .select(image.imageUrl)
+                .select(Projections.constructor(ProductImageDto.class,
+                        image.id,
+                        image.imageUrl,
+                        image.sortOrder))
                 .from(image)
                 .where(image.product.id.eq(productId)
                         .and(image.isMain.eq(isMain)))
@@ -44,7 +49,8 @@ public class ProductDetailService {
                 .fetch();
     }
 
-    private QueryResultDto fetchProductDetail(Long productId, List<String> mainImages, List<String> detailImages) {
+
+    private QueryResultDto fetchProductDetail(Long productId, List<ProductImageDto> mainImages, List<ProductImageDto> detailImages) {
         QProduct product = QProduct.product;
         QBrand brand = QBrand.brand;
         QReview review = QReview.review;
@@ -56,9 +62,7 @@ public class ProductDetailService {
                         product.price.stringValue(),
                         review.rating.avg().coalesce(0.0),
                         review.countDistinct(),
-                        brand.name,
-                        Expressions.constant(mainImages),
-                        Expressions.constant(detailImages)
+                        brand.name
                 ))
                 .from(product)
                 .join(product.brand, brand)
