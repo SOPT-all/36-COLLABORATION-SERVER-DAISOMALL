@@ -1,13 +1,12 @@
 package com.sopt.DaisoMall.domain.product.service;
 
-import com.sopt.DaisoMall.domain.product.dto.response.PopularProductListResponse;
+import com.sopt.DaisoMall.domain.product.dto.response.list.PopularProductListResponse;
 import com.sopt.DaisoMall.domain.product.entity.Product;
 import com.sopt.DaisoMall.domain.product.repository.ProductRepository;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
