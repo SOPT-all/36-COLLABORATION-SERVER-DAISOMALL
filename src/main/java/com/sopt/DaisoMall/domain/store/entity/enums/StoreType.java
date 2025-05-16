@@ -1,4 +1,4 @@
-package com.sopt.DaisoMall.domain.product.entity.enums;
+package com.sopt.DaisoMall.domain.store.entity.enums;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
