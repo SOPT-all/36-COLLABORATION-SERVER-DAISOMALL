@@ -22,7 +22,7 @@ public class BrandController {
     private final ProductSearchService searchService;
 
     @Operation(summary = "브랜드별 상품 조회")
-    @GetMapping("/{brandId}")
+    @GetMapping("/{brandId}/products")
     public ApiResponse<ProductBrandListResponse> getBrandProducts(@PathVariable Long brandId, ProductSearchRequest request) {
         Slice<ProductBrandResponse> slice = searchService.getBrandProducts(brandId, request.pageNumber(), request.pageSize());
         return ApiResponse.response(HttpStatus.OK.value(), ResponseMessage.GET_BRAND_PRODUCTS_SUCCESS.getMessage(), ProductBrandListResponse.of(slice));
