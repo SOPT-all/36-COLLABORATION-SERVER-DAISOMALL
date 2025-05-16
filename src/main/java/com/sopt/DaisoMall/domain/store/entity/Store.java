@@ -1,6 +1,6 @@
 package com.sopt.DaisoMall.domain.store.entity;
 
-import com.sopt.DaisoMall.domain.product.entity.enums.StoreType;
+import com.sopt.DaisoMall.domain.store.entity.enums.StoreType;
 import com.sopt.DaisoMall.global.common.entity.BaseEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
