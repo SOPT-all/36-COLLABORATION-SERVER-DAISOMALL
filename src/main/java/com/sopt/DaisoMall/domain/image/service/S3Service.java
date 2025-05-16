@@ -3,10 +3,8 @@ package com.sopt.DaisoMall.domain.image.service;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.*;
 import com.sopt.DaisoMall.domain.image.exception.FileUploadFailedException;
-import com.sopt.DaisoMall.global.common.exception.BaseException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 

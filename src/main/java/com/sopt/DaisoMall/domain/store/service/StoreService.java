@@ -90,7 +90,7 @@ public class StoreService {
                         stock.floor,
                         stock.shelfNo,
                         stock.stockCount,
-                        stock.stockStatus.stringValue()
+                        stock.stockStatus
                 ))
                 .from(stock)
                 .join(stock.store, store)

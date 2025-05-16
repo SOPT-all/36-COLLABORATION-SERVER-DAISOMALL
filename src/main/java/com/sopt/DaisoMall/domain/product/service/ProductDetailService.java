@@ -10,6 +10,7 @@ import com.sopt.DaisoMall.domain.product.dto.response.ProductDetailResponse;
 import com.sopt.DaisoMall.domain.product.dto.response.ProductImageResponse;
 import com.sopt.DaisoMall.domain.product.entity.QProduct;
 import com.sopt.DaisoMall.domain.product.entity.QProductImage;
+import com.sopt.DaisoMall.domain.product.exception.NotFoundProductException;
 import com.sopt.DaisoMall.domain.review.entity.QReview;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -26,11 +27,11 @@ public class ProductDetailService {
         List<ProductImageDto> mainImages = fetchImages(productId, true);
         List<ProductImageDto> detailImages = fetchImages(productId, false);
 
-        QueryResultDto result = fetchProductDetail(productId, mainImages, detailImages);
+        QueryResultDto result = fetchProductDetail(productId);
 
-//        if (result == null) {
-//            throw new ProductNotFoundException();
-//        }
+        if (result == null) {
+            throw new NotFoundProductException();
+        }
 
         return ProductDetailResponse.from(result, mainImages, detailImages);
     }
@@ -50,7 +51,7 @@ public class ProductDetailService {
     }
 
 
-    private QueryResultDto fetchProductDetail(Long productId, List<ProductImageDto> mainImages, List<ProductImageDto> detailImages) {
+    private QueryResultDto fetchProductDetail(Long productId) {
         QProduct product = QProduct.product;
         QBrand brand = QBrand.brand;
         QReview review = QReview.review;
