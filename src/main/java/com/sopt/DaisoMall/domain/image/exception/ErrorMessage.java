@@ -7,7 +7,8 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum ErrorMessage {
     INVALID_FILE_NAME("파일 이름이 유효하지 않습니다"),
-    FILE_UPLOAD_FAIL("파일 업로드에 실패했습니다");
+    FILE_UPLOAD_FAIL("파일 업로드에 실패했습니다"),
+    INVALID_SORT_ORDER("정렬 순서는 0부터 시작합니다.");
 
     private final String message;
 }
