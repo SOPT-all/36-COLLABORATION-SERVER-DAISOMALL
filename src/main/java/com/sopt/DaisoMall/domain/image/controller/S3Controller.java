@@ -26,13 +26,13 @@ public class S3Controller {
     @PostMapping(value = "/upload/products", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ApiResponse<String> uploadProductImageToS3(@RequestPart("data") @Valid final ProductImageUploadDto productImageUploadDto, @RequestPart("file") MultipartFile file) throws IOException {
         String imageUrl = productImageService.uploadProductImage(file, productImageUploadDto);
-        return ApiResponse.response(HttpStatus.OK.value(), "이미지 업로드 성공", imageUrl);
+        return ApiResponse.response(HttpStatus.OK.value(), ResponseMessage.S3_UPLOAD_SUCCESS.getMessage(), imageUrl);
     }
 
     @Operation(summary = "(서버 테스트용) productId로 S3에 업로드되어 있는 상품 이미지(메인, 디테일) 모두 삭제")
     @DeleteMapping("/{productId}")
     public ApiResponse<String> deleteProductImageFromS3(@PathVariable("productId") long productId){
         s3Service.deleteProductImageFromS3(productId);
-        return ApiResponse.response(HttpStatus.OK.value(), "S3에 있는 상품 이미지 삭제 성공");
+        return ApiResponse.response(HttpStatus.OK.value(), ResponseMessage.S3_FILE_DELETE_SUCCESS.getMessage());
     }
 }
