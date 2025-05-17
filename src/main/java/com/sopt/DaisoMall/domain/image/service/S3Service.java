@@ -12,7 +12,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -23,11 +22,8 @@ public class S3Service {
     @Value("${cloud.aws.s3.bucket}")
     private String bucket;
 
-    public String uploadToS3(MultipartFile file, long productId, String category){
-
-        String fileName = generateFileName(file);
-        String key = String.format("products/%d/%s/%s", productId, category, fileName);
-
+    // S3 업로드
+    public String uploadToS3(MultipartFile file, String key){
         ObjectMetadata metadata = new ObjectMetadata();
         metadata.setContentLength(file.getSize());
         metadata.setContentType(file.getContentType());
@@ -41,18 +37,13 @@ public class S3Service {
         return amazonS3.getUrl(bucket, key).toString();
     }
 
-    private String generateFileName(MultipartFile file) {
-        String extension = "";
-        String original = file.getOriginalFilename();
-        if (original != null && original.contains(".")) {
-            extension = original.substring(original.lastIndexOf("."));
-        }
-        return UUID.randomUUID() + extension;
+    // productId와 관련된 디렉토리
+    public String getPrefix(String type, long productId){
+        return String.format("%s/%d/", type, productId);
     }
 
-    public void deleteProductImageFromS3(long productId){
-        String prefix = String.format("products/%d/", productId);
-
+    // S3에 있는 파일 삭제
+    public void deleteFromS3(String prefix){
         ListObjectsV2Request listRequest = new ListObjectsV2Request()
                 .withBucketName(bucket)
                 .withPrefix(prefix);
