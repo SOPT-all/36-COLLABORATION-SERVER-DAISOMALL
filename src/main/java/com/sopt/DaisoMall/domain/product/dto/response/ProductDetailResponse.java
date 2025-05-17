@@ -23,7 +23,7 @@ public record ProductDetailResponse(
                 ratingAvg.toString(),
                 dto.reviewCount().toString(),
                 dto.brandName(),
-                new ProductImageResponse(new ProductImageResponse.ProductImageWrapper(main, detail))
+                new ProductImageResponse(main, detail)
         );
     }
 

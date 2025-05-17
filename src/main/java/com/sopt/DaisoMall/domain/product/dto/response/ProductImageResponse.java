@@ -4,9 +4,8 @@ import com.sopt.DaisoMall.domain.image.dto.request.ProductImageDto;
 
 import java.util.List;
 
-public record ProductImageResponse(ProductImageWrapper productImage) {
-    public record ProductImageWrapper(
-            List<ProductImageDto> main,
-            List<ProductImageDto> detail
-    ) {}
+public record ProductImageResponse(
+        List<ProductImageDto> main,
+        List<ProductImageDto> detail
+) {
 }
