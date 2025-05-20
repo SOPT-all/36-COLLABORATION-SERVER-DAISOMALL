@@ -39,7 +39,7 @@ public class S3Service {
 
     // productId와 관련된 디렉토리
     public String getPrefix(String type, long productId){
-        return String.format("%s/%d/", type, productId);
+        return String.format("%d/%s/", productId, type);
     }
 
     // S3에 있는 파일 삭제
