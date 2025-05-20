@@ -25,11 +25,13 @@ public class ProductImageService {
         Product product = productRepository.findById(dto.productId())
                 .orElseThrow(NotFoundProductException::new);
 
+        int nextSortOrder = productImageRepository.countByProductAndIsMain(product, dto.isMain());
+
         ProductImage image = ProductImage.builder()
                 .product(product)
                 .imageUrl(imageUrl)
                 .isMain(Boolean.TRUE.equals(dto.isMain()))
-                .sortOrder(dto.sortOrder())
+                .sortOrder(nextSortOrder)
                 .build();
 
         productImageRepository.save(image);
@@ -47,7 +49,7 @@ public class ProductImageService {
         String category = Boolean.TRUE.equals(isMain) ? "main" : "detail";
         String fileName = generateFileName(file);
 
-        return String.format("products/%d/%s/%s", productId, category, fileName);
+        return String.format("/%d/products/%s/%s", productId, category, fileName);
     }
 
     // 파일 이름 -> UUID로 설정
