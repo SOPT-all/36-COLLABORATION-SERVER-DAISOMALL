@@ -48,7 +48,7 @@ public class ProductController {
         return ApiResponse.response(HttpStatus.OK.value(), ResponseMessage.SORT_STORE_PRODUCTS_SUCCESS.getMessage(), ProductListResponse.of(slice));
     }
 
-    @Operation(summary = "지금 많이 찾는 상품 조회", description = "지금 많이 찾는 상품 20개를 5개씩 4페이지로 나누어 리스트로 반환합니다.")
+    @Operation(summary = "지금 많이 찾는 상품 조회", description = "지금 많이 찾는 상품 15개를 5개씩 3페이지로 나누어 리스트로 반환합니다.")
     @GetMapping("/popular")
     public ApiResponse<PopularProductListResponse> search() {
         PopularProductListResponse response = popularProductService.getPopularProducts();
