@@ -16,7 +16,7 @@ public class PopularProductService {
 
     @Transactional(readOnly = true)
     public PopularProductListResponse getPopularProducts() {
-        List<Product> products = productRepository.findTop20ByOrderById();
+        List<Product> products = productRepository.findTop15ByOrderById();
         return PopularProductListResponse.of(products, 5);
     }
 

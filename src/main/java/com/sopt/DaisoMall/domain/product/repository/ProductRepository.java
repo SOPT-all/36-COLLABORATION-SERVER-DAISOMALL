@@ -14,7 +14,7 @@ import org.springframework.stereotype.Repository;
 public interface ProductRepository extends JpaRepository<Product, Long> {
 
     @EntityGraph(attributePaths = "productImages")
-    List<Product> findTop20ByOrderById();
+    List<Product> findTop15ByOrderById();
 
     @Query("""
     SELECT DISTINCT p FROM Product p
