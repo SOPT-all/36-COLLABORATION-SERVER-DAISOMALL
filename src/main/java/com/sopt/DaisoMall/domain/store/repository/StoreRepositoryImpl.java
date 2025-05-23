@@ -54,8 +54,12 @@ public class StoreRepositoryImpl implements StoreRepositoryCustom {
                 .where(builder)
                 .orderBy(
                         new CaseBuilder().when(SPS.stockCount.gt(0)).then(1).otherwise(0).desc(),
-                        new CaseBuilder().when(STORE.storeType.eq(StoreType.FRANCHISE)).then(1).otherwise(0).desc(),
-                        new CaseBuilder().when(STORE.storeType.eq(StoreType.DISTRIBUTION)).then(1).otherwise(0).desc()
+                        new CaseBuilder()
+                                .when(STORE.storeType.eq(StoreType.FRANCHISE)).then(3)
+                                .when(STORE.storeType.eq(StoreType.DISTRIBUTION)).then(2)
+                                .when(STORE.storeType.eq(StoreType.DIRECT)).then(1)
+                                .otherwise(0)
+                                .desc()
                 )
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize() + 1)
