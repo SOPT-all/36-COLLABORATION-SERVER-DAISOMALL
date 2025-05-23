@@ -23,4 +23,10 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     WHERE p.brand.id = :brandId
     """)
     Slice<Product> findByBrandId(@Param("brandId") Long brandId, Pageable pageable);
+
+    @EntityGraph(attributePaths = {
+            "productTagMappings",
+            "productTagMappings.productTag"
+    })
+    Slice<Product> findDistinctByBrand_NameContainingIgnoreCase(String brandName, Pageable pageable);
 }

@@ -1,5 +1,6 @@
 package com.sopt.DaisoMall.domain.product.service;
 
+import com.sopt.DaisoMall.domain.brand.repository.BrandRepository;
 import com.sopt.DaisoMall.domain.product.dto.response.ProductBrandResponse;
 import com.sopt.DaisoMall.domain.product.dto.response.ProductResponse;
 import com.sopt.DaisoMall.domain.product.exception.PageNotFoundException;
@@ -19,6 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class ProductSearchService {
     private final ProductRepository productRepository;
     private final ProductStockRepository stockRepository;
+    private final BrandRepository brandRepository;
 
     public Slice<ProductResponse> searchProducts(
             String keyword,
@@ -29,6 +31,11 @@ public class ProductSearchService {
             throw new PageNotFoundException();
         Pageable page = PageRequest.of(pageNumber, pageSize, Sort.by(Sort.Direction.DESC, "id"));
 
+        if (brandRepository.existsByNameIgnoreCase(keyword)) {
+            return productRepository
+                    .findDistinctByBrand_NameContainingIgnoreCase(keyword, page)
+                    .map(ProductResponse::from);
+        }
         return stockRepository
                 .searchByKeyword(keyword, page)
                 .map(ProductResponse::from);
