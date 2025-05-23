@@ -13,13 +13,24 @@ import org.springframework.stereotype.Repository;
 public interface ProductStockRepository extends JpaRepository<StoreProductStock, Long> {
 
     @Query("""
-    SELECT DISTINCT p
-      FROM Product p
+    SELECT s.product
+      FROM StoreProductStock s
+      JOIN s.product p
       LEFT JOIN p.brand b
-      LEFT JOIN StoreProductStock s ON s.product = p
      WHERE LOWER(p.productName) LIKE LOWER(CONCAT('%', :keyword, '%'))
         OR LOWER(p.productCode) LIKE LOWER(CONCAT('%', :keyword, '%'))
         OR LOWER(TRIM(b.name)) LIKE LOWER(CONCAT('%', :keyword, '%'))
     """)
     Slice<Product> searchByKeyword(@Param("keyword") String keyword, Pageable pageable);
+
+    @Query("""
+    SELECT s.product
+      FROM StoreProductStock s
+      JOIN s.product p
+      LEFT JOIN p.brand b
+     WHERE LOWER(p.productName) LIKE LOWER(CONCAT('%', :keyword, '%'))
+        OR LOWER(p.productCode) LIKE LOWER(CONCAT('%', :keyword, '%'))
+        OR LOWER(TRIM(b.name)) LIKE LOWER(CONCAT('%', :keyword, '%'))
+    """)
+    Slice<Product> findNewest(@Param("keyword") String keyword, Pageable pageable);
 }

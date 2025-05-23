@@ -27,6 +27,12 @@ public class ProductSortService {
             throw new PageNotFoundException();
 
         Pageable pageable = PageRequest.of(pageNumber, pageSize, option.toSort());
+
+        if (option == SortOption.NEWEST) {
+            return stockRepository.findNewest(keyword, pageable)
+                    .map(ProductResponse::from);
+        }
+
         return stockRepository.searchByKeyword(keyword, pageable)
                 .map(ProductResponse::from);
     }
