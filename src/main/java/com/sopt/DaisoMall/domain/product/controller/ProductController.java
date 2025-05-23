@@ -32,14 +32,14 @@ public class ProductController {
     private final PopularProductService popularProductService;
     private final ProductDetailService productDetailService;
 
-    @Operation(summary = "상품 검색 (상품명, 품번, 브랜드)")
+    @Operation(summary = "상품 검색 (상품명, 품번, 브랜드)", description = "브랜드는 VT, 비즈, 락앤락 중 하나로 가능합니다.")
     @GetMapping("/search")
     public ApiResponse<ProductListResponse> search(@RequestParam String keyword, ProductSearchRequest request) {
         Slice<ProductResponse> slice = searchService.searchProducts(keyword, request.pageNumber(), request.pageSize());
         return ApiResponse.response(HttpStatus.OK.value(), ResponseMessage.SEARCH_STORE_PRODUCTS_SUCCESS.getMessage(), ProductListResponse.of(slice));
     }
 
-    @Operation(summary = "상품 정렬 (최신,가격 낮은 순, 높은 순)")
+    @Operation(summary = "상품 정렬 (최신순, 가격 낮은 순, 가격 높은 순)", description = "SortOption은 최신순, 가격 낮은 순, 가격 높은 순으로 가능합니다.")
     @GetMapping("/search/{keyword}/sort")
     public ApiResponse<ProductListResponse> sort(@PathVariable String keyword, ProductSortRequest request) {
         SortOption option = request.toSortOption();
