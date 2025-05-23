@@ -61,6 +61,7 @@ public class PopularProductService {
                 .leftJoin(tagMapping).on(tagMapping.product.eq(product))
                 .leftJoin(tag).on(tagMapping.productTag.eq(tag))
                 .where(product.category.eq(Category.valueOf(category)))
+                .orderBy(product.id.desc())
                 .offset(pageNumber * pageSize)
                 .limit(pageSize + 1)
                 .fetch();
