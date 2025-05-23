@@ -9,6 +9,7 @@ import com.sopt.DaisoMall.domain.product.dto.response.ProductResponse;
 import com.sopt.DaisoMall.domain.product.dto.response.list.PopularProductListResponse;
 import com.sopt.DaisoMall.domain.product.dto.response.list.ProductCategoryListResponse;
 import com.sopt.DaisoMall.domain.product.dto.response.list.ProductListResponse;
+import com.sopt.DaisoMall.domain.product.entity.enums.Category;
 import com.sopt.DaisoMall.domain.product.entity.enums.SortOption;
 import com.sopt.DaisoMall.domain.product.service.PopularProductService;
 import com.sopt.DaisoMall.domain.product.service.ProductDetailService;
@@ -67,7 +68,8 @@ public class ProductController {
     @Operation(summary = "카테고리별 조회", description = "카테고리 종류는 BEAUTY_HYGIENE, KITCHENWARE, CLEANING_BATHROOM, STORAGE_ORGANIZATION 입니다.")
     @GetMapping
     public ApiResponse<ProductCategoryListResponse> getProductByCategory(@RequestParam("category") String category, ProductSearchRequest request){
-        Slice<ProductCategoryResponse> slice = popularProductService.getProductByCategory(category, request.pageNumber(), request.pageSize());
+        Category category1 = Category.from(category);
+        Slice<ProductCategoryResponse> slice = popularProductService.getProductByCategory(category1.name(), request.pageNumber(), request.pageSize());
         return ApiResponse.response(HttpStatus.OK.value(), ResponseMessage.GET_PRODUCT_CATEGORY_SUCCESS.getMessage(), ProductCategoryListResponse.of(slice));
     }
 }
