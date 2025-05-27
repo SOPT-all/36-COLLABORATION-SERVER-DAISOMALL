@@ -2,6 +2,8 @@ package com.sopt.DaisoMall.domain.product.repository;
 
 import com.sopt.DaisoMall.domain.product.entity.Product;
 import java.util.List;
+
+import com.sopt.DaisoMall.domain.product.repository.custom.ProductRepositoryCustom;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
 import org.springframework.data.jpa.repository.EntityGraph;
@@ -11,7 +13,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ProductRepository extends JpaRepository<Product, Long> {
+public interface ProductRepository extends JpaRepository<Product, Long>, ProductRepositoryCustom {
 
     @EntityGraph(attributePaths = "productImages")
     List<Product> findTop15ByOrderById();
